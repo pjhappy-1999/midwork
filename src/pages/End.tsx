@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 
 export default function End() {
   const navigate = useNavigate();
-  const videoSrc = `${import.meta.env.BASE_URL}视频/background2.mp4`;
 
   const handleNavigation = (e: React.MouseEvent<HTMLDivElement>) => {
     const { clientX } = e;
@@ -19,17 +18,43 @@ export default function End() {
 
   return (
     <div
-      className="relative min-h-screen w-full bg-[#020617] text-slate-200 overflow-hidden font-sans cursor-pointer flex items-center justify-center"
+      className="relative min-h-screen w-full bg-[#0a0a0a] text-slate-200 overflow-hidden font-sans cursor-pointer flex items-center justify-center"
       onClick={handleNavigation}
     >
-      <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
-        <video autoPlay loop muted playsInline className="absolute top-0 left-0 min-w-full min-h-full object-cover opacity-12">
-          <source src={videoSrc} type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-[#020617]/90" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_55%_45%_at_50%_35%,rgba(59,130,246,0.22),transparent_60%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:64px_64px] opacity-30" />
-      </div>
+      {/* Dynamic Background Blobs */}
+      <motion.div
+        animate={{
+          scale: [1, 1.2, 1],
+          x: [0, 80, 0],
+          y: [0, 40, 0],
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-[10%] left-[15%] w-72 h-72 md:w-96 md:h-96 bg-indigo-500/20 rounded-full blur-[100px] pointer-events-none z-0"
+      />
+      <motion.div
+        animate={{
+          scale: [1, 1.5, 1],
+          x: [0, -80, 0],
+          y: [0, -40, 0],
+        }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        className="absolute bottom-[10%] right-[15%] w-80 h-80 md:w-[30rem] md:h-[30rem] bg-purple-600/20 rounded-full blur-[100px] pointer-events-none z-0"
+      />
+      <motion.div
+        animate={{
+          scale: [1, 1.3, 1],
+          opacity: [0.3, 0.6, 0.3],
+        }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-4xl bg-blue-400/5 rounded-full blur-[120px] pointer-events-none z-0"
+      />
+
+      {/* Decorative Grid and Contour Lines Background */}
+      <div className="absolute inset-0 z-0 opacity-[0.15] pointer-events-none" style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='topographic' width='100' height='100' patternUnits='userSpaceOnUse'%3E%3Cpath d='M0 100 Q 25 50, 50 100 T 100 100 M 0 80 Q 25 30, 50 80 T 100 80 M 0 60 Q 25 10, 50 60 T 100 60 M 0 40 Q 25 -10, 50 40 T 100 40' fill='none' stroke='white' stroke-width='0.5' stroke-opacity='0.5'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23topographic)'/%3E%3C/svg%3E")`,
+        backgroundSize: '300px 300px',
+      }} />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none z-0" />
 
       <div className="absolute top-0 left-0 w-1/2 h-full z-20 opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none flex items-center justify-start pl-8">
         <div className="bg-slate-900/70 border border-slate-700 px-4 py-2 rounded-full text-white/60 text-sm">点击返回上页</div>
